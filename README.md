@@ -2,6 +2,10 @@
 
 Learning about Linux Kernel development
 
+## Linux Foundation Course
+
+- [Class Forum](https://forum.linuxfoundation.org/categories/lfd103-class-forum)
+
 ## Resources
 
 - https://www.opengroup.org/membership/forums/platform/unix
