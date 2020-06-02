@@ -57,6 +57,96 @@ One of my first actions as a maintainer was to request my tree to be added to li
 - [List of mailing lists and their archives](https://lore.kernel.org/lists.html)
 - [kernel.org Git Repositories](https://git.kernel.org/)
 
+### Patches
+
+Changes to the kernel are normally called a "patch" after the name of the historical tool that works with incremental changes to a text file, likely originating in the patch used in stitching a quilt or mending a piece of clothing.
+
+**Git**
+
+- [Git Book](https://git-scm.com/book/en/v2)
+- [A Short History of Git](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git)
+
+`git format-patch -1 --pretty=fuller 3a38e874d70b`
+
+**Patch Components**
+
+- **Commit ID**
+
+The auto-generated SHA 1 hash is generated from a cryptographic hash function that has all the important information about the patch, such as the commit date, the committer's name and email address, the log message, and more. Changing any of the information associated with the Commit ID results in changing it. This makes it a tamperproof fast way to compare two commits using the IDs, and git pull requests become fast and efficient.
+
+- **Commit header**
+-
+
+major subsystem: minor area: short description of what is being changed
+
+As you can see in the example provided, the patch changes the usbip_host driver, which is a sub-driver of the usbip driver. This driver falls under the drivers/usb subsystem. The author of the patch writes this information in a standard format with ":" separating the major and minor subsystem fields. You will also see "/" as a separator, which would look like usbip/usbip_host: cleanup do_rebind() return path instead of usbip: usbip_host: cleanup do_rebind() return path. Using "/" or ":" is determined by the maintainer's preference. If in doubt, refer to a few patches for the subsystem for information on individual preferences.
+
+- **Commit log**
+
+It provides a detailed description of the change and why the change is made. Alternate design choices if any are considered. Details about the testing done. The example we provided shows a small change and the commit log is simple and to the point. Commit logs can be long for patches that fix panics, as they include panic stack traces. We encourage you to take a look at a few commit logs in the kernel source repository to get a better understanding of the kind of information that is relevant to include in them.
+
+- **Author**
+
+This component provides the author's name and email information. This information can be specified when you run git commit or it can be configured in your .gitconfig file, which is a very convenient way to generate commits. You can see an example of a .gitconfig file for author and email below. Please note that the email address in the Signed-off-by should match the email address you send patches from.
+
+_Email and Name Details_
+
+```
+[user]
+    email = <your email address>
+    name = <your name>
+[format]
+    signoff = true
+[core]
+    editor = vim
+```
+
+- **AuthorDate**
+
+Auto-generated commit time and date. This value comes from the system time of your computer when you create the change.
+
+- **Commit**
+
+The committer's name and email address. The committer is a maintainer or developer that applies the patch to a git repository. This patch was picked up by the USB maintainer Greg Kroah-Hartman and committed to the usb tree and tested prior to being included in a pull request from Greg KH to Linus Torvalds. Since it was pulled, you won't see Linus as the committer for this patch. If you look at the git log, you will see several merge commits from Linus for when he pulls subsystem trees from maintainers.
+
+- **CommitDate**
+
+Auto-generated commit time and date when Greg KH applied this patch to the usb tree. You will notice that there is a difference of 19 days between the initial commit date and the commit date when the patch was applied to the usb tree. This is not unusual, depending on where things are in the release cycle. Merge windows and quiet periods could delay a patch from being applied.
+
+- **Signed-off-by**
+
+Using sign-off, developers certify the patch to be their original work or have the right to pass it on as an open source patch. In our example, the author signed off and then, as the usb maintainer, Greg KH signed-off on the patch. Please refer to Sign your work - the Developer's Certificate of Origin for detailed information on this tag, as it is a very important part of the kernel development process.
+
+- [Sign your work - the Developer’s Certificate of Origin](https://www.kernel.org/doc/html/latest/process/submitting-patches.html#sign-your-work-the-developer-s-certificate-of-origin)
+
+**Tags**
+
+- **Acked-by**
+
+This tag is often used by the maintainer of the affected code when that maintainer neither contributed to, nor forwarded the patch. As an example, I maintain the usbip driver and I use the Acked-by tag to ask the USB maintainer to pick patches sent by other developers.
+
+- **Reviewed-by**
+
+This tag indicates that the patch has been reviewed by the person named in the tag.
+
+- **Reported-by**
+
+This tag gives credit to people who find bugs and report them.
+
+- **Tested-by**
+
+This tag indicates that the patch has been tested by the person named in the tag.
+
+- **Suggested-by**
+
+This tag is used to give credit for the patch idea to the person named in the tag.
+
+- **Fixes**
+
+This tag indicates that the patch fixes an issue in a previous commit referenced by its Commit ID. This tag allows us to track where the bug originated.
+
+- [Using Reported-by:, Tested-by:, Reviewed-by:, Suggested-by: and Fixes:](https://www.kernel.org/doc/html/latest/process/submitting-patches.html#using-reported-by-tested-by-reviewed-by-suggested-by-and-fixes)
+
 ## Resources
 
 - https://www.kernel.org/doc/html/v4.13/process/development-process.html
