@@ -147,6 +147,20 @@ This tag indicates that the patch fixes an issue in a previous commit referenced
 
 - [Using Reported-by:, Tested-by:, Reviewed-by:, Suggested-by: and Fixes:](https://www.kernel.org/doc/html/latest/process/submitting-patches.html#using-reported-by-tested-by-reviewed-by-suggested-by-and-fixes)
 
+**Patch Email Subject Line Conventions**
+
+- [PATCH RFC] or [RFC PATCH] indicates the author is requesting comments on the patch. RFC stands for "Request For Comments".
+
+- [PATCH v4] is used to indicate that the patch is the 4th version of this specific change that is being submitted.
+
+**Patch Version History**
+
+It is a requirement to include the patch version history when sending a re-worked patch. The patch revision history on what changed between the current version and the previous version is added between the “---” and the “start of the diff” in the patch file. Any text that is added here gets thrown away and will not be included in the commit when it is merged into the source tree. It is good practice to include information that helps with reviews and doesn’t add value to the commit log here. Please check mailing lists to get a feel for what kind of information gets added here.
+
+Do not send new versions of a patch as a reply to a previous version. Start a new thread for each version of a patch. An example description of what changed is: "Changes since v3: Added null check for <variable name> as suggested by <name>." You can see a patch example with version history for the v2 version.
+
+- [Patch Version History](https://patchwork.kernel.org/patch/11163415/)
+
 ## Resources
 
 - https://www.kernel.org/doc/html/v4.13/process/development-process.html
